@@ -1,0 +1,151 @@
+/* Размер блока. Параметр $w обязателен, если параметр $h не указан, то принимает значение из параметра $w. */
+@mixin size($w, $h: null) {
+    width: $w;
+    min-width: $w;
+    $newH: $h;
+
+    @if $h==null {
+        $newH: $w;
+    }
+
+    height: $newH;
+    min-height: $newH;
+}
+
+/* Позицина для левого вернего и правого нижнего углов */
+@mixin pos-start($left, $top) {
+    left: $left;
+    top: $top;
+}
+
+@mixin pos-end($right, $bottom) {
+    right: $right;
+    bottom: $bottom;
+}
+
+
+// Позиционирование блока по правому краю
+@mixin block-right-align {
+    margin-left: auto;
+    margin-right: 0;
+}
+
+// Позиционирование блока по центру
+@mixin block-center-align {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Задаёт ширину на 100% */
+@mixin w100 {
+    width: 100%;
+}
+
+/* Задаёт высоту на 100% */
+@mixin h100 {
+    height: 100%;
+}
+
+/* Задает размер на 100%, чтобы заполнить родителя */
+@mixin fit-to-parent {
+    @include w100;
+    @include h100;
+}
+
+/* padding горизонтальный */
+@mixin px($val) {
+    padding-left: $val;
+    padding-right: $val;
+}
+
+/* padding вертикальный */
+@mixin py($val) {
+    padding-top: $val;
+    padding-bottom: $val;
+}
+
+/* margin горизонтальный */
+@mixin mx($val) {
+    margin-left: $val;
+    margin-right: $val;
+}
+
+/* margin вертикальный */
+@mixin my($val) {
+    margin-top: $val;
+    margin-bottom: $val;
+}
+
+/* применить стили к дочерним элементам, исключая последний */
+@mixin except-last {
+    &:not(:last-child) {
+        @content;
+    }
+}
+
+@mixin except-last-type {
+    &:not(:last-of-type) {
+        @content;
+    }
+}
+
+/* применить стили к дочерним элементам, исключая первый */
+@mixin except-first {
+    &:not(:first-child) {
+        @content;
+    }
+}
+
+@mixin except-first-type {
+    &:not(:first-of-type) {
+        @content;
+    }
+}
+
+@mixin mx-between($val) {
+    $val: $val / 2;
+
+    @include except-first {
+        margin-left: $val;
+    }
+
+    @include except-last {
+        margin-right: $val;
+    }
+}
+
+@mixin plain-hover {
+
+    &,
+    &:hover {
+        @content;
+    }
+}
+
+/* Круглая рамка */
+@mixin rounded {
+    border-radius: $border-rounded-size;
+}
+
+/* игнорировать отступы страницы */
+@mixin ignore-page-offset {
+    @include mx(-$page-py);
+}
+
+@mixin ignore-padding($px) {
+    @include mx(-$px);
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+@mixin reset-input {
+    background-color: transparent;
+    border: none;
+}
+
+@mixin table-column-fitwidth {
+    width: 1px;
+    white-space: nowrap;
+}
