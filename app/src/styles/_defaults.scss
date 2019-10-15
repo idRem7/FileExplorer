@@ -201,8 +201,8 @@ router-outlet {
 }
 
 // @include Webkit-Autofill($black);
-@include WebKit-Autofill-NoFocus($black, $blue-input);
-@include WebKit-Autofill-Focus($black, $white);
+// @include WebKit-Autofill-NoFocus($black, $blue-input);
+// @include WebKit-Autofill-Focus($black, $white);
 
 // CSS Side Effects
 
