@@ -1,0 +1,7 @@
+@mixin i-rounded {
+    border-radius: 13px;
+}
+
+@mixin i-bordered {
+    border: solid 1px $gray-border2;
+}
