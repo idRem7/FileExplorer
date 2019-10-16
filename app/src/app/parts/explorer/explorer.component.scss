@@ -1,0 +1,41 @@
+.explorer {
+  display: block;
+
+  &_header {
+    height: 44px;
+    border-bottom: 1px solid rgba(0, 95, 167, 0.35);
+    background-color: #f7f7f7;
+    @include px(20px);
+
+    &_title {
+      height: 44px;
+      line-height: 44px;
+      font-size: 1.3em;
+      font-weight: 500;
+      color: #525252;
+    }
+  }
+
+  &_body {
+    display: grid;
+    grid-template: "a b";
+    grid-template-columns: 410px 1fr;
+    min-height: calc(100vh - 44px);
+
+    &_aside {
+      // padding: 20px;
+      padding-top: 0;
+      background-color: #f7f7f7;
+      border-right: 1px solid rgba(0, 95, 167, 0.35);
+      border-bottom: 1px solid rgba(0, 95, 167, 0.35);
+
+      &_search {}
+
+      &_path-viewer {}
+    }
+
+    &_content {
+      padding: 20px;
+    }
+  }
+}
