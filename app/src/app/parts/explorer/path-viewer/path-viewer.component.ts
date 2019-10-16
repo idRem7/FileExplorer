@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Folder } from 'src/app/lib/models/folder.model';
 
 @Component({
   selector: 'app-path-viewer',
@@ -6,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./path-viewer.component.scss']
 })
 export class PathViewerComponent implements OnInit {
+
+  @Input()
+  root: Folder;
 
   constructor() { }
 
