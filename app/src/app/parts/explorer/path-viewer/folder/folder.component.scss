@@ -1,0 +1,29 @@
+.folder {
+  display: block;
+  color: gray;
+
+  &--have-content {
+    color: black;
+    cursor: pointer;
+  }
+
+  &_title {
+    @include py(2px);
+    display: grid;
+    grid-template: "a b";
+    grid-template-columns: 20px 1fr;
+
+    &_logo {
+      width: 11px;
+      margin-top: 2px;
+    }
+
+    &_name {
+      line-height: 1.1em;
+    }
+  }
+
+  &_content {
+    padding-left: 20px;
+  }
+}

@@ -1,0 +1,15 @@
+.file {
+  display: grid;
+  grid-template: "a b";
+  grid-template-columns: 20px 1fr;
+  @include py(2px);
+
+  &_logo {
+    width: 11px;
+    margin-top: 2px;
+  }
+
+  &_name {
+    line-height: 1.1em;
+  }
+}

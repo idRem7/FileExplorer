@@ -10,6 +10,7 @@ import { ContentViewerComponent } from './parts/explorer/content-viewer/content-
 import { PathViewerComponent } from './parts/explorer/path-viewer/path-viewer.component';
 import { FileComponent } from './parts/explorer/path-viewer/file/file.component';
 import { FolderComponent } from './parts/explorer/path-viewer/folder/folder.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,9 @@ import { FolderComponent } from './parts/explorer/path-viewer/folder/folder.comp
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [
     DataService,

@@ -1,10 +1,14 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, HostBinding, HostListener } from '@angular/core';
 import { Folder } from 'src/app/lib/models/folder.model';
+import {File} from 'src/app/lib/models/file.model'
 
 @Component({
   selector: 'app-folder',
   templateUrl: './folder.component.html',
-  styleUrls: ['./folder.component.scss']
+  // styleUrls: ['./folder.component.scss']
+  host: {
+    class: 'folder'
+  }
 })
 export class FolderComponent implements OnInit {
 
@@ -13,11 +17,13 @@ export class FolderComponent implements OnInit {
   @Input()
   folder: Folder;
 
-  get itemsAmount(){
+  @HostBinding('class.folder--have-content')
+  get itemsAmount() {
     return this.folder.content.length;
   }
 
-  get isOpen(){
+
+  get isOpen() {
     return this._open;
   }
 
@@ -26,8 +32,20 @@ export class FolderComponent implements OnInit {
   ngOnInit() {
   }
 
-  toggleOpen(){
+  toggleOpen() {
     this._open = !this._open;
+  }
+
+  isFile(elem: File | Folder): boolean {
+    return elem instanceof File;
+  }
+
+  open(){
+    this._open = true;
+  }
+
+  close(){
+    this._open = false;
   }
 
 }

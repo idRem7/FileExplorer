@@ -1,1 +1,54 @@
-<p>folder works!</p>
+<div class="folder_title"
+     (click)="toggleOpen()">
+  <div class="folder_title_logo">
+    <div *ngIf="isOpen && itemsAmount">
+      <svg x="0px"
+           y="0px"
+           viewBox="0 0 22.354 22.354"
+           style="enable-background:new 0 0 22.354 22.354;"
+           xml:space="preserve">
+        <g>
+          <rect y="8.61"
+                width="22.354"
+                height="5.133" />
+        </g>
+      </svg>
+    </div>
+    <div *ngIf="!isOpen && itemsAmount">
+      <svg x="0px"
+           y="0px"
+           viewBox="0 0 22.354 22.354"
+           style="enable-background:new 0 0 22.354 22.354;"
+           xml:space="preserve">
+        <g>
+          <polygon points="8.61,22.354 13.744,22.354 13.744,13.744 22.354,13.744 22.354,8.611 13.744,8.611 13.744,0 8.61,0 8.61,8.611 
+		0,8.611 0,13.744 8.61,13.744 	" />
+        </g>
+      </svg>
+    </div>
+    <div *ngIf="!itemsAmount">
+      <svg x="0px"
+           y="0px"
+           viewBox="0 0 512 512"
+           style="enable-background:new 0 0 512 512;"
+           xml:space="preserve">
+        <g>
+          <g>
+            <path d="M256,0C114.837,0,0,114.837,0,256s114.837,256,256,256s256-114.837,256-256S397.163,0,256,0z" />
+          </g>
+        </g>
+      </svg>
+    </div>
+  </div>
+  <div class="folder_title_name">{{folder.name}}</div>
+</div>
+
+<div class="folder_content"
+     *ngIf="isOpen && itemsAmount">
+  <div *ngFor="let item of folder.content">
+    <app-folder *ngIf="!isFile(item)"
+                [folder]="item"></app-folder>
+    <app-file *ngIf="isFile(item)"
+              [file]="item"></app-file>
+  </div>
+</div>

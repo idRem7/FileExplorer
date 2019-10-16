@@ -1,0 +1,27 @@
+.search {
+  display: block;
+  height: 44px;
+  border-bottom: solid 1px #d6d6d6;
+
+  &_form {
+    height: 100%;
+    position: relative;
+
+    &_icon {
+      position: absolute;
+      top: 11px;
+      left: 20px;
+      height: 20px;
+    }
+
+    &_field {
+      display: block;
+      height: 100%;
+      width: 100%;
+      border: none;
+      padding-right: 20px;
+      padding-left: 50px;
+      color: #656565;
+    }
+  }
+}

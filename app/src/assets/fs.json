@@ -4,31 +4,78 @@
     "content": [
         {
             "isFolder": true,
-            "name": "Folder 1",
+            "name": "Music",
             "content": [
                 {
+                    "isFolder": true,
+                    "name": "Bad music",
+                    "content": [
+                        {
+                            "isFolder": false,
+                            "name": "Элджей - Минимал.mp3",
+                            "content": "Distinctively productize interoperable niches through premier potentialities. Proactively conceptualize covalent outsourcing before cross-unit systems. Credibly incentivize alternative meta-services without distinctive e-services."
+                        },
+                        {
+                            "isFolder": false,
+                            "name": "Элджей - Sayonara детка (feat. Era Istrefi).mp3",
+                            "content": "Distinctively productize interoperable niches through premier potentialities. Proactively conceptualize covalent outsourcing before cross-unit systems. Credibly incentivize alternative meta-services without distinctive e-services."
+                        }
+                    ]
+                },
+                {
+                    "isFolder": true,
+                    "name": "Synth-wave",
+                    "content": []
+                },
+                {
+                    "isFolder": true,
+                    "name": "Pop",
+                    "content": [
+                        {
+                            "isFolder": false,
+                            "name": "Billie Eilish - bad guy.mp3",
+                            "content": "Distinctively productize interoperable niches through premier potentialities. Proactively conceptualize covalent outsourcing before cross-unit systems. Credibly incentivize alternative meta-services without distinctive e-services."
+                        },
+                        {
+                            "isFolder": false,
+                            "name": "Katy Perry - Swish Swish (feat. Nicki Minaj).mp3",
+                            "content": "Distinctively productize interoperable niches through premier potentialities. Proactively conceptualize covalent outsourcing before cross-unit systems. Credibly incentivize alternative meta-services without distinctive e-services."
+                        }
+                    ]
+                },
+                {
                     "isFolder": false,
-                    "name": "File 1",
+                    "name": "Rick Astley - Never gonna give you up.mp3",
+                    "content": "Distinctively productize interoperable niches through premier potentialities. Proactively conceptualize covalent outsourcing before cross-unit systems. Credibly incentivize alternative meta-services without distinctive e-services."
+                },
+                {
+                    "isFolder": false,
+                    "name": "a-Ha - Take on me.mp3",
                     "content": "Distinctively productize interoperable niches through premier potentialities. Proactively conceptualize covalent outsourcing before cross-unit systems. Credibly incentivize alternative meta-services without distinctive e-services."
                 }
             ]
         },
         {
             "isFolder": true,
-            "name": "Folder 1",
+            "name": "Memes",
             "content": [
                 {
                     "isFolder": true,
-                    "name": "Folder 1",
+                    "name": "Cat memes",
                     "content": [
                         {
                             "isFolder": true,
-                            "name": "Folder 1",
+                            "name": "White cat and two girls",
                             "content": []
                         },
                         {
                             "isFolder": false,
-                            "name": "File 1",
+                            "name": "Grumpy cat.jpeg",
+                            "content": "Distinctively productize interoperable niches through premier potentialities. Proactively conceptualize covalent outsourcing before cross-unit systems. Credibly incentivize alternative meta-services without distinctive e-services."
+                        },
+                        {
+                            "isFolder": false,
+                            "name": "ha ha classic.jpeg",
                             "content": "Distinctively productize interoperable niches through premier potentialities. Proactively conceptualize covalent outsourcing before cross-unit systems. Credibly incentivize alternative meta-services without distinctive e-services."
                         }
                     ]
@@ -37,18 +84,18 @@
         },
         {
             "isFolder": true,
-            "name": "Folder 1",
+            "name": "Private life",
             "content": []
         },
         {
             "isFolder": false,
-            "name": "File 1",
+            "name": "lorem ispum.txt",
             "content": "Globally grow customized alignments whereas 24/365 products. Efficiently scale open-source best practices via bricks-and-clicks action items. Distinctively procrastinate business networks with."
         },
         {
             "isFolder": false,
-            "name": "File 1",
-            "content": "Distinctively productize interoperable niches through premier potentialities. Proactively conceptualize covalent outsourcing before cross-unit systems. Credibly incentivize alternative meta-services without distinctive e-services."
+            "name": "koorsuch.doc",
+            "content": "файл курсовой создан, уже отлично!"
         }
     ]
 }
