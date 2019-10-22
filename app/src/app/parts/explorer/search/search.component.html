@@ -1,4 +1,4 @@
-<form class="search_form">
+<div class="search_form">
 
   <div class="search_form_icon">
     <svg viewBox="0 0 500 500">
@@ -9,7 +9,10 @@
     </svg>
   </div>
 
-  <input class="search_form_field" placeholder="Search"
+  <input class="search_form_field"
+         placeholder="Search"
+         #searchInput="ngModel"
+         [(ngModel)]="currentInputValue"       
          type="text">
-         
-</form>
+
+</div>

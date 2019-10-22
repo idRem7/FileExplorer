@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Folder } from 'src/app/lib/models/folder.model';
 import { File } from 'src/app/lib/models/file.model';
 import { DataService } from 'src/app/lib/Services/data.service';
+import { SelectedItem } from 'src/app/lib/models/selected-item.model';
 
 @Component({
     selector: 'app-path-viewer',
@@ -13,19 +14,22 @@ import { DataService } from 'src/app/lib/Services/data.service';
 })
 export class PathViewerComponent implements OnInit {
 
-    root: Folder = new Folder();
+    @Input()
+    root: Folder;
+
+    @Output()
+    select: EventEmitter<SelectedItem> = new EventEmitter<SelectedItem>();
 
     constructor(private dataSVC: DataService) { }
 
-    ngOnInit() {
-        this.dataSVC.getFiles()
-            .subscribe(data => {
-                this.root = data;
-            });
-    }
+    ngOnInit() { }
 
     isFile(elem: File | Folder): boolean {
         return elem instanceof File;
+    }
+
+    onSelectedItem(selectedItem: SelectedItem) {  
+        this.select.emit(selectedItem);
     }
 
 }

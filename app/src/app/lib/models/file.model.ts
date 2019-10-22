@@ -1,7 +1,8 @@
 export class File {
     name: string;
     content: string;
-
+    isHide: boolean = false;
+    
     static createFrom(protopype: any): File {
         let file = new File();
 

@@ -3,6 +3,8 @@ import { File } from './file.model';
 export class Folder {
     name: string = '';
     content: Array<File | Folder> = [];
+    isHide: boolean = false;
+
 
     static createFrom(protopype: any): Folder {
         let folder = new Folder();

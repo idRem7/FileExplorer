@@ -1,6 +1,8 @@
 <div *ngFor="let item of root.content">
   <app-folder *ngIf="!isFile(item)"
+              (selectItem)="onSelectedItem($event)"
               [folder]="item"></app-folder>
   <app-file *ngIf="isFile(item)"
+            (selectItem)="onSelectedItem($event)"
             [file]="item"></app-file>
 </div>
