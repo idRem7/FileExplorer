@@ -1,6 +1,7 @@
-import { Component, OnInit, Input, HostListener, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, HostListener, Output, EventEmitter, HostBinding } from '@angular/core';
 import { SelectedItem } from 'src/app/lib/models/selected-item.model';
 import { File } from 'src/app/lib/models/file.model';
+import { TouchSequence } from 'selenium-webdriver';
 
 @Component({
   selector: 'app-file',
@@ -18,6 +19,11 @@ export class FileComponent implements OnInit {
   @Output()
   select: EventEmitter<SelectedItem> = new EventEmitter<SelectedItem>();
 
+  @HostBinding('class.file--hide')
+  get isHide() {
+    return this.file.isHide;
+  }
+
   constructor() { }
 
   ngOnInit() {
@@ -27,8 +33,16 @@ export class FileComponent implements OnInit {
   onSelect() {
     let selectedItem = new SelectedItem();
     selectedItem.item = this.file;
-    selectedItem.path.push(this.file.name);    
-    this.select.emit(selectedItem);        
-  }a
+    selectedItem.path.push(this.file.name);
+    this.select.emit(selectedItem);
+  }
+
+  show() {
+    this.file.isHide = false;
+  }
+
+  hide() {
+    this.file.isHide = true;
+  }
 
 }

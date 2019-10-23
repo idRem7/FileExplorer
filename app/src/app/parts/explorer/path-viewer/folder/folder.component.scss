@@ -1,5 +1,13 @@
 .folder {
-  display: block;  
+  display: block;
+
+  &--hide {
+    visibility: hidden;
+    overflow: hidden;
+    height: 0;
+    box-sizing: border-box;
+    padding: 0;
+  }
 
   &_title {
     @include py(2px);
@@ -29,7 +37,7 @@
     height: auto;
     overflow: hidden;
 
-    &--hide{
+    &--hide {
       height: 0;
     }
   }

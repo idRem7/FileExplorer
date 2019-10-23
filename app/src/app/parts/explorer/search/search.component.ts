@@ -27,23 +27,19 @@ export class SearchComponent implements OnInit {
     ngOnInit() {
 
         this.route.queryParams.pipe(
-            filter(q => !!q.search),         
+            filter(q => !!q.search),
             first()
         ).subscribe(params => {
-            this.currentInputValue = params.search;   
+            this.currentInputValue = params.search;
         })
 
         this.inputValue.update.pipe(
             distinctUntilChanged(),
             debounceTime(200),
-        ).subscribe(a => {        
+        ).subscribe(a => {
 
-            this.router.navigate([], {
-                relativeTo: this.route,
-                queryParams: { search: a },
-                queryParamsHandling: 'merge'
-            });
-         
+            this.router.navigate([], { queryParams: { search: a } });
+
         });
 
 

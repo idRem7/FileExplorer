@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input, ViewChildren, QueryList, AfterViewInit, AfterViewChecked } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, ViewChildren, QueryList, AfterViewInit, AfterViewChecked, AfterContentChecked } from '@angular/core';
 import { Folder } from 'src/app/lib/models/folder.model';
 import { File } from 'src/app/lib/models/file.model';
 import { SelectedItem } from 'src/app/lib/models/selected-item.model';
@@ -6,6 +6,7 @@ import { FolderComponent } from './folder/folder.component';
 import { FileComponent } from './file/file.component';
 import { Subject, of, Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
     selector: 'app-path-viewer',
@@ -15,13 +16,16 @@ import { first } from 'rxjs/operators';
         class: 'path-viewer'
     }
 })
-export class PathViewerComponent implements OnInit, AfterViewInit {
+export class PathViewerComponent implements OnInit, AfterViewInit, AfterContentChecked {
 
     private _isViewChildrenFoldersReady: boolean = false;
     private _viewChildrenFoldersReady$: Subject<boolean> = new Subject<boolean>();
 
     private _isViewChildrenFilesReady: boolean = false;
     private _viewChildrenFilesReady$: Subject<boolean> = new Subject<boolean>();
+
+    private _isRootReady: boolean = false;
+    private _RootReady$: Subject<boolean> = new Subject<boolean>();
 
     @ViewChildren(FolderComponent)
     folders: QueryList<FolderComponent>;
@@ -63,6 +67,13 @@ export class PathViewerComponent implements OnInit, AfterViewInit {
 
     }
 
+    ngAfterContentChecked() {
+        if (!this._isRootReady && !!this.root) {
+            this._isRootReady = true;
+            this._RootReady$.next(true);
+        }
+    }
+
     checkViewClidrenFoldersReady$(): Observable<boolean> {
         if (this._isViewChildrenFoldersReady) {
             return of(true);
@@ -79,6 +90,14 @@ export class PathViewerComponent implements OnInit, AfterViewInit {
         }
     }
 
+    checkRoot(): Observable<boolean> {
+        if (this._isRootReady) {
+            return of(true).pipe(first());
+        } else {
+            return this._RootReady$.pipe(first());
+        }
+    }
+
     isFile(elem: File | Folder): boolean {
         return elem instanceof File;
     }
@@ -89,8 +108,6 @@ export class PathViewerComponent implements OnInit, AfterViewInit {
             if (f.folder.name != selectedItem.path[selectedItem.path.length - 1]) {
                 f.closeChildrenFolders();
                 f.close();
-                console.log("Close " + f.folder.name);
-                                
             }
         });
     }
@@ -111,13 +128,28 @@ export class PathViewerComponent implements OnInit, AfterViewInit {
             });
         } else {
             this.checkViewClidrenFoldersReady$().subscribe(e => {
-                let item = this.folders.find(f => f.folder.name == arrayPath[0]);   
-                item.selectItem(arrayPath.slice(1, arrayPath.length));                
+                let item = this.folders.find(f => f.folder.name == arrayPath[0]);
+                item.selectItem(arrayPath.slice(1, arrayPath.length));
             });
         }
 
     }
 
-    search(query: string) { }
+    search(query: string) {
+        this.checkRoot()
+            .subscribe(e => {
+                this.root.search(query);
+            });
+    }
+
+    closeChildrenFolders() {
+
+        this.folders.forEach(folder => {
+            folder.closeChildrenFolders();
+            folder.close();
+        })
+    }
+
+
 
 }

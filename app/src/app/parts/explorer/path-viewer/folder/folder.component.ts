@@ -4,7 +4,7 @@ import { File } from 'src/app/lib/models/file.model'
 import { SelectedItem } from 'src/app/lib/models/selected-item.model';
 import { FileComponent } from '../file/file.component';
 import { Subject, Observable, of } from 'rxjs';
-import { first, tap } from 'rxjs/operators';
+import { switchMap, map } from 'rxjs/operators';
 
 @Component({
     selector: 'app-folder',
@@ -42,6 +42,11 @@ export class FolderComponent implements OnInit, AfterViewInit {
 
     get isOpen() {
         return this._open;
+    }
+
+    @HostBinding('class.folder--hide')
+    get isHide() {
+        return this.folder.isHide;
     }
 
     constructor(private changeDetector: ChangeDetectorRef) { }
@@ -137,6 +142,14 @@ export class FolderComponent implements OnInit, AfterViewInit {
         this._open = false;
     }
 
+    show() {
+        this.folder.isHide = false;
+    }
+
+    hide() {
+        this.folder.isHide = true;
+    }
+
     closeChildrenFolders() {
 
         this.folders.forEach(folder => {
@@ -144,7 +157,6 @@ export class FolderComponent implements OnInit, AfterViewInit {
             folder.close();
         })
     }
-
 
     selectItem(arrayPath: Array<string>) {
 
