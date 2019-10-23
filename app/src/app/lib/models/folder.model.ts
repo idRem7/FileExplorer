@@ -3,6 +3,7 @@ import { File } from './file.model';
 export class Folder {
     name: string = '';
     content: Array<File | Folder> = [];
+    isHide: boolean = false;
 
     static createFrom(protopype: any): Folder {
         let folder = new Folder();
@@ -29,15 +30,15 @@ export class Folder {
                 }
             }
 
-            if (isFolderA && !isFolderB) {              
+            if (isFolderA && !isFolderB) {
                 return -1;
             }
 
             if (!isFolderA && isFolderB) {
                 return 1;
             }
-            
-            if (!isFolderA && !isFolderB) { 
+
+            if (!isFolderA && !isFolderB) {
                 if (a.name < b.name) {
                     return -1;
                 } else {
@@ -48,5 +49,13 @@ export class Folder {
             return 0;
 
         });
+    }
+
+    get amountFolders() {
+        return this.content.reduce((prevVal, item) => (item instanceof Folder) ? ++prevVal : prevVal, 0);
+    }
+
+    get amountFiles() {
+        return this.content.reduce((prevVal, item) => (item instanceof File) ? ++prevVal : prevVal, 0);
     }
 }

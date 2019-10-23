@@ -1,1 +1,6 @@
-<p>content-viewer works!</p>
+<div *ngIf="haveElement">
+    <div>Path: /{{elem.pathToString}}</div>
+    <div>Name: {{elem.item.name}}</div>
+    <div *ngIf="isFile">{{elem.item.content}}</div>
+    <div *ngIf="!isFile">Elements: {{items}}</div>
+</div>

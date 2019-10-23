@@ -5,7 +5,10 @@
 <div class="explorer_body">
   <div class="explorer_body_aside">
     <app-search class="explorer_body_aside_search"></app-search>
-    <app-path-viewer class="explorer_body_aside_path-viewer"></app-path-viewer>
+    <app-path-viewer class="explorer_body_aside_path-viewer"
+                     (select)="refreshSelectedItem($event)"
+                     [root]="root"></app-path-viewer>
   </div>
-  <app-content-viewer class="explorer_body_content"></app-content-viewer>
+  <app-content-viewer class="explorer_body_content"
+                      [elem]="selectedItem"></app-content-viewer>
 </div>
