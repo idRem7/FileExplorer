@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewChild, AfterViewChecked, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Folder } from 'src/app/lib/models/folder.model';
 import { DataService } from 'src/app/lib/Services/data.service';
-import { first, filter, delay, tap } from 'rxjs/operators';
+import { first, filter, delay, tap, map, distinctUntilChanged } from 'rxjs/operators';
 import { SelectedItem } from 'src/app/lib/models/selected-item.model';
 import { PathViewerComponent } from './path-viewer/path-viewer.component';
 
@@ -20,7 +20,7 @@ export class ExplorerComponent implements OnInit {
     root: Folder;
 
     @ViewChild(PathViewerComponent, { static: true })
-    pathviever: PathViewerComponent;
+    pathViever: PathViewerComponent;
 
     constructor(private router: Router,
         private route: ActivatedRoute,
@@ -40,7 +40,17 @@ export class ExplorerComponent implements OnInit {
             filter(q => !!q.path),
             first()
         ).subscribe(params => {
-            this.pathviever.selectItem(params.path);
+            this.pathViever.selectItem(params.path);
+        });
+
+        this.route.queryParams.pipe(
+            map(params => params.search),
+            distinctUntilChanged(),
+            filter(s => s !== undefined),
+        ).subscribe(s => {
+            this.pathViever.search(s);
+            this.selectedItem = null;
+            this.pathViever.closeChildrenFolders();
         });
 
     }

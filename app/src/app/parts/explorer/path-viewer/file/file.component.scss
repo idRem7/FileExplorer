@@ -4,6 +4,14 @@
   grid-template-columns: 20px 1fr;
   @include py(2px);
 
+  &--hide {
+    visibility: hidden;
+    overflow: hidden;
+    height: 0;
+    box-sizing: border-box;
+    padding: 0;
+  }
+
   &_logo {
     width: 11px;
     margin-top: 2px;
