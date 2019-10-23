@@ -1,5 +1,6 @@
 <div class="folder_title"
-     (click)="select()"
+     [ngClass]="{'folder_title--have-content': itemsAmount}"
+     (click)="onSelectSelf()"
      (click)="toggleOpen()">
   <div class="folder_title_logo">
     <div *ngIf="isOpen && itemsAmount">
@@ -48,10 +49,10 @@
      [ngClass]="{'folder_content--hide': !isOpen || !itemsAmount}">
   <div *ngFor="let item of folder.content">
     <app-folder *ngIf="!isFile(item)"
-                (selectItem)="onSelectedItem($event)"
+                (select)="onSelectedItem($event)"
                 [folder]="item"></app-folder>
     <app-file *ngIf="isFile(item)"
-              (selectItem)="onSelectedItem($event)"
+              (select)="onSelectedItem($event)"
               [file]="item"></app-file>
   </div>
 </div>

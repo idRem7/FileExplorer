@@ -16,7 +16,7 @@ export class FileComponent implements OnInit {
   file: File;
 
   @Output()
-  selectItem: EventEmitter<SelectedItem> = new EventEmitter<SelectedItem>();
+  select: EventEmitter<SelectedItem> = new EventEmitter<SelectedItem>();
 
   constructor() { }
 
@@ -24,11 +24,11 @@ export class FileComponent implements OnInit {
   }
 
   @HostListener('click')
-  select() {
+  onSelect() {
     let selectedItem = new SelectedItem();
     selectedItem.item = this.file;
     selectedItem.path.push(this.file.name);    
-    this.selectItem.emit(selectedItem);        
-  }
+    this.select.emit(selectedItem);        
+  }a
 
 }

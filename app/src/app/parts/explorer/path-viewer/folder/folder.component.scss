@@ -1,17 +1,18 @@
 .folder {
-  display: block;
-  color: gray;
-
-  &--have-content {
-    color: black;
-    cursor: pointer;
-  }
+  display: block;  
 
   &_title {
     @include py(2px);
+    color: gray;
     display: grid;
     grid-template: "a b";
     grid-template-columns: 20px 1fr;
+
+    &--have-content {
+      color: black;
+      cursor: pointer;
+    }
+
 
     &_logo {
       width: 11px;

@@ -2,11 +2,13 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Folder } from 'src/app/lib/models/folder.model';
 import { File } from 'src/app/lib/models/file.model';
 import { SelectedItem } from 'src/app/lib/models/selected-item.model';
+import { ChangeDetectionStrategy } from '@angular/compiler/src/core';
 
 @Component({
   selector: 'app-content-viewer',
   templateUrl: './content-viewer.component.html',
-  styleUrls: ['./content-viewer.component.scss']
+  styleUrls: ['./content-viewer.component.scss'],
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ContentViewerComponent implements OnInit {
 
@@ -14,7 +16,7 @@ export class ContentViewerComponent implements OnInit {
   // Для отображения контента
 
   @Input()
-  elem: SelectedItem = null;
+  elem: SelectedItem;
 
   get items() {
     if (this.elem.item instanceof Folder) {

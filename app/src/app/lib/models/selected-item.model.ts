@@ -9,6 +9,7 @@ export class SelectedItem {
     get pathToString(): string {
         let reversePath = this.path.slice();
         reversePath.reverse();
-        return reversePath.join('/');
+
+        return reversePath.join('/') + ((this.item instanceof Folder) ? '/' : '');
     }
 }

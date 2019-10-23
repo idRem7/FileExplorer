@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, Params } from '@angular/router';
+import { Component, OnInit, ViewChild, AfterViewChecked, ChangeDetectorRef } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Folder } from 'src/app/lib/models/folder.model';
-import { File } from 'src/app/lib/models/file.model';
 import { DataService } from 'src/app/lib/Services/data.service';
-import { first } from 'rxjs/operators';
+import { first, filter, delay, tap } from 'rxjs/operators';
 import { SelectedItem } from 'src/app/lib/models/selected-item.model';
+import { PathViewerComponent } from './path-viewer/path-viewer.component';
 
 @Component({
     selector: 'app-root',
@@ -16,18 +16,19 @@ import { SelectedItem } from 'src/app/lib/models/selected-item.model';
 })
 export class ExplorerComponent implements OnInit {
 
-    // Сюда перекидываем обязанности подписки на маршрут и параметры поиска
-    // А так же перекладываем работу с content-handler
+    selectedItem: SelectedItem;
+    root: Folder;
 
-    selectedItem: SelectedItem = null;
-    root: Folder = new Folder();
-    queryParams: Params;
+    @ViewChild(PathViewerComponent, { static: true })
+    pathviever: PathViewerComponent;
 
     constructor(private router: Router,
         private route: ActivatedRoute,
-        private dataSVC: DataService) { }
+        private dataSVC: DataService,
+        private changeDetector: ChangeDetectorRef) { }
 
     ngOnInit() {
+
         this.dataSVC.getFiles()
             .pipe(
                 first()
@@ -35,32 +36,22 @@ export class ExplorerComponent implements OnInit {
                 this.root = data;
             });
 
-        this.route.queryParams.subscribe(e => {
-            this.queryParams = e;
-
+        this.route.queryParams.pipe(
+            filter(q => !!q.path),
+            first()
+        ).subscribe(params => {
+            this.pathviever.selectItem(params.path);
         });
 
-        this.route.url.subscribe(e => {
-            console.log(e);
-        })
     }
 
     refreshSelectedItem(selectedItem: SelectedItem) {
         this.selectedItem = selectedItem;
-        console.log(this.queryParams);
-
         this.router.navigate([], {
             queryParams: { path: this.selectedItem.pathToString },
-            queryParamsHandling: 'merge' 
-        }).then(e => {       
-
-
+            queryParamsHandling: 'merge'
         });
-
-        // this.router.navigateByUrl(this.selectedItem.pathToString, {
-        //     queryParamsHandling: 'merge'
-        // });
-
+        this.changeDetector.detectChanges();
     }
 
 }
